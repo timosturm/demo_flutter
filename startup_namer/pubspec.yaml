@@ -30,7 +30,7 @@ dependencies:
     git:
       url: git://github.com/jeroentrappers/flutter_keychain
 
-#  barcode_scan: ^1.0.0
+  barcode_scan: ^1.0.0
   firebase_messaging: ^5.1.6
 
 dev_dependencies:
