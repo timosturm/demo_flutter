@@ -21,15 +21,12 @@ class MyApp extends StatelessWidget {
       ],
       onGenerateTitle: (BuildContext c) => L10n.of(c).title,
       theme: appTheme.getTheme(),
-      home: RandomWords(),
+      home: MyList(),
     );
   }
 }
 
-class RandomWordsState extends State<RandomWords> {
-//  final Set<WordPair> _saved = Set<WordPair>();
-  final _biggerFont = const TextStyle(fontSize: 18.0);
-
+class MyListState extends State<MyList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,13 +36,6 @@ class RandomWordsState extends State<RandomWords> {
           padding: EdgeInsets.all(4.0),
           child: Image.asset('assets/logo/logo.png'),
         ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.list),
-//              onPressed: _pushSaved
-            onPressed: null,
-          ),
-        ],
       ),
       body: Padding(
         padding: EdgeInsets.all(10.0),
@@ -65,13 +55,9 @@ class RandomWordsState extends State<RandomWords> {
       ),
     );
   }
-
-  Future<String> loadAsset(BuildContext context, key) async {
-    return DefaultAssetBundle.of(context).loadString(key);
-  }
 }
 
-class RandomWords extends StatefulWidget {
+class MyList extends StatefulWidget {
   @override
-  RandomWordsState createState() => new RandomWordsState();
+  MyListState createState() => new MyListState();
 }
