@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'appTheme.dart' as appTheme;
+import '../appTheme.dart' as appTheme;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
 
-import 'l10n/messages_all.dart';
+import '../l10n/messages_all.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,10 +20,7 @@ class MyApp extends StatelessWidget {
         const Locale('en', ''),
         const Locale('de', ''),
       ],
-      onGenerateTitle: (BuildContext c) =>
-      DemoLocalizations
-          .of(c)
-          .title,
+      onGenerateTitle: (BuildContext c) => DemoLocalizations.of(c).title,
       theme: appTheme.getTheme(),
       home: RandomWords(),
     );
@@ -38,9 +35,7 @@ class RandomWordsState extends State<RandomWords> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(DemoLocalizations
-            .of(context)
-            .title),
+        title: Text(DemoLocalizations.of(context).title),
         leading: Padding(
           padding: EdgeInsets.all(4.0),
           child: Image.asset('assets/logo/logo.png'),
@@ -55,29 +50,19 @@ class RandomWordsState extends State<RandomWords> {
       ),
       body: Padding(
         padding: EdgeInsets.all(10.0),
-          child: Column(
-            children: <Widget>[
-              Text(DemoLocalizations
-                  .of(context)
-                  .greeting),
-              Divider(),
-              Text(DemoLocalizations
-                  .of(context)
-                  .introductionWithName),
-              Divider(),
-              Text(DemoLocalizations
-                  .of(context)
-                  .introductionWithAge),
-              Divider(),
-              Text(DemoLocalizations
-                  .of(context)
-                  .questionHowAreYou),
-              Divider(),
-              Text(DemoLocalizations
-                  .of(context)
-                  .questionCanIHelp),
-            ],
-          ),
+        child: Column(
+          children: <Widget>[
+            Text(DemoLocalizations.of(context).greeting),
+            Divider(),
+            Text(DemoLocalizations.of(context).introductionWithName),
+            Divider(),
+            Text(DemoLocalizations.of(context).introductionWithAge),
+            Divider(),
+            Text(DemoLocalizations.of(context).questionHowAreYou),
+            Divider(),
+            Text(DemoLocalizations.of(context).questionCanIHelp),
+          ],
+        ),
       ),
     );
   }
@@ -99,7 +84,7 @@ class DemoLocalizations {
 
   static Future<DemoLocalizations> load(Locale locale) {
     final String name =
-    locale.countryCode.isEmpty ? locale.languageCode : locale.toString();
+        locale.countryCode.isEmpty ? locale.languageCode : locale.toString();
     final String localeName = Intl.canonicalizedLocale(name);
 
     return initializeMessages(localeName).then((_) {
@@ -131,8 +116,8 @@ class DemoLocalizations {
 
   String get introductionWithName {
     return Intl.message(
-      'Good Day.',
-      name: 'greeting',
+      'My name is x.',
+      name: 'introductionWithName',
       desc: 'Greeting the user of the app',
       locale: localeName,
     );
@@ -140,8 +125,8 @@ class DemoLocalizations {
 
   String get introductionWithAge {
     return Intl.message(
-      'Good Day.',
-      name: 'greeting',
+      'I am y years old.',
+      name: 'introductionWithAge',
       desc: 'Greeting the user of the app',
       locale: localeName,
     );
@@ -149,8 +134,8 @@ class DemoLocalizations {
 
   String get questionHowAreYou {
     return Intl.message(
-      'Good Day.',
-      name: 'greeting',
+      'How are you today?',
+      name: 'questionHowAreYou',
       desc: 'Greeting the user of the app',
       locale: localeName,
     );
@@ -158,8 +143,8 @@ class DemoLocalizations {
 
   String get questionCanIHelp {
     return Intl.message(
-      'Good Day.',
-      name: 'greeting',
+      'How may I help you?',
+      name: 'questionCanIHelp',
       desc: 'Greeting the user of the app',
       locale: localeName,
     );
