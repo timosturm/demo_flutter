@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         const Locale('en', ''),
         const Locale('de', ''),
       ],
-      onGenerateTitle: (BuildContext c) => DemoLocalizations.of(c).title,
+      onGenerateTitle: (BuildContext c) => L10n.of(c).title,
       theme: appTheme.getTheme(),
       home: RandomWords(),
     );
@@ -35,7 +35,7 @@ class RandomWordsState extends State<RandomWords> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(DemoLocalizations.of(context).title),
+        title: Text(L10n.of(context).title),
         leading: Padding(
           padding: EdgeInsets.all(4.0),
           child: Image.asset('assets/logo/logo.png'),
@@ -52,15 +52,15 @@ class RandomWordsState extends State<RandomWords> {
         padding: EdgeInsets.all(10.0),
         child: Column(
           children: <Widget>[
-            Text(DemoLocalizations.of(context).greeting),
+            Text(L10n.of(context).greeting),
             Divider(),
-            Text(DemoLocalizations.of(context).introductionWithName),
+            Text(L10n.of(context).introductionWithName),
             Divider(),
-            Text(DemoLocalizations.of(context).introductionWithAge),
+            Text(L10n.of(context).introductionWithAge),
             Divider(),
-            Text(DemoLocalizations.of(context).questionHowAreYou),
+            Text(L10n.of(context).questionHowAreYou),
             Divider(),
-            Text(DemoLocalizations.of(context).questionCanIHelp),
+            Text(L10n.of(context).questionCanIHelp),
           ],
         ),
       ),
@@ -77,23 +77,23 @@ class RandomWords extends StatefulWidget {
   RandomWordsState createState() => new RandomWordsState();
 }
 
-class DemoLocalizations {
+class L10n {
   String localeName;
 
-  DemoLocalizations(this.localeName);
+  L10n(this.localeName);
 
-  static Future<DemoLocalizations> load(Locale locale) {
+  static Future<L10n> load(Locale locale) {
     final String name =
         locale.countryCode.isEmpty ? locale.languageCode : locale.toString();
     final String localeName = Intl.canonicalizedLocale(name);
 
     return initializeMessages(localeName).then((_) {
-      return DemoLocalizations(localeName);
+      return L10n(localeName);
     });
   }
 
-  static DemoLocalizations of(BuildContext context) {
-    return Localizations.of<DemoLocalizations>(context, DemoLocalizations);
+  static L10n of(BuildContext context) {
+    return Localizations.of<L10n>(context, L10n);
   }
 
   String get title {
@@ -151,8 +151,7 @@ class DemoLocalizations {
   }
 }
 
-class DemoLocalizationsDelegate
-    extends LocalizationsDelegate<DemoLocalizations> {
+class DemoLocalizationsDelegate extends LocalizationsDelegate<L10n> {
   const DemoLocalizationsDelegate();
 
   @override
@@ -161,12 +160,12 @@ class DemoLocalizationsDelegate
   }
 
   @override
-  Future<DemoLocalizations> load(Locale locale) {
-    return DemoLocalizations.load(locale);
+  Future<L10n> load(Locale locale) {
+    return L10n.load(locale);
   }
 
   @override
-  bool shouldReload(LocalizationsDelegate<DemoLocalizations> old) {
+  bool shouldReload(LocalizationsDelegate<L10n> old) {
     return false;
   }
 }
