@@ -1,0 +1,39 @@
+{
+  "@@last_modified": "2019-10-28T11:29:20.945163",
+  "title": "Hello World",
+  "@title": {
+    "description": "Title for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "greeting": "Good Day.",
+  "@greeting": {
+    "description": "Greeting the user of the app",
+    "type": "text",
+    "placeholders": {}
+  },
+  "introductionWithName": "My name is x.",
+  "@introductionWithName": {
+    "description": "Greeting the user of the app",
+    "type": "text",
+    "placeholders": {}
+  },
+  "introductionWithAge": "I am y years old.",
+  "@introductionWithAge": {
+    "description": "Greeting the user of the app",
+    "type": "text",
+    "placeholders": {}
+  },
+  "questionHowAreYou": "How are you today?",
+  "@questionHowAreYou": {
+    "description": "Greeting the user of the app",
+    "type": "text",
+    "placeholders": {}
+  },
+  "questionCanIHelp": "How may I help you?",
+  "@questionCanIHelp": {
+    "description": "Greeting the user of the app",
+    "type": "text",
+    "placeholders": {}
+  }
+}

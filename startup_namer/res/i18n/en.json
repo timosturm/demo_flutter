@@ -1,0 +1,8 @@
+{
+  "title": "This is just a test!",
+  "greeting": "Hello.",
+  "introductionWithName": "My name is x.",
+  "introductionWithAge": "I am y years old.",
+  "questionHowAreYou": "How are you today?",
+  "questionCanIHelp": "Can I help you with something?"
+}
