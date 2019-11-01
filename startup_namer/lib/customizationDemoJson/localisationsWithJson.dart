@@ -38,7 +38,7 @@ class L10n {
   // load the json file containing the strings and save it as _localized
   static loadJson(localName) async {
     // load json file as asset (ref. pubspec.yaml -> assets)
-    String jsonString = await rootBundle.loadString('i18n/$localName.json');
+    String jsonString = await rootBundle.loadString('res/i18n/$localName.json');
 
     Map<String, dynamic> map = jsonDecode(jsonString);
     _localized = map.cast<String, String>();
