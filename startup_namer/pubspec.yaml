@@ -25,10 +25,11 @@ dependencies:
   cupertino_icons: ^0.1.2
   english_words: ^3.1.0
   http: ^0.11.3+16
+  flutter_secure_storage: ^3.3.1+1
   #  flutter_keychain: ^1.0.0
-  flutter_keychain:
-    git:
-      url: git://github.com/jeroentrappers/flutter_keychain
+#  flutter_keychain:
+#    git:
+#      url: git://github.com/jeroentrappers/flutter_keychain
 
   barcode_scan: ^1.0.0
   firebase_messaging: ^5.1.6

@@ -109,15 +109,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_keychain:
+  flutter_secure_storage:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "9318fc16a034a99a7b712284e7573321e1fbf061"
-      url: "git://github.com/jeroentrappers/flutter_keychain"
-    source: git
-    version: "1.0.1"
+      name: flutter_secure_storage
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.3.1+1"
   flutter_test:
     dependency: transitive
     description: flutter
@@ -141,7 +139,7 @@ packages:
       name: glob
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.7"
+    version: "1.2.0"
   html:
     dependency: transitive
     description:
@@ -233,6 +231,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+  node_interop:
+    dependency: transitive
+    description:
+      name: node_interop
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.3"
+  node_io:
+    dependency: transitive
+    description:
+      name: node_io
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1+2"
   node_preamble:
     dependency: transitive
     description:
