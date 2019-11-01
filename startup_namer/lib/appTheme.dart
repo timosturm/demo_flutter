@@ -2,12 +2,6 @@ import 'package:flutter/material.dart';
 
 getTheme() {
   return ThemeData(
-    primaryColor: Colors.orange,
-  );
-}
-
-getTheme2() {
-  return ThemeData(
 // Define the default brightness and colors.
     brightness: Brightness.dark,
     primaryColor: Colors.green,
@@ -23,13 +17,5 @@ getTheme2() {
       title: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
       body1: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
     ),
-  );
-}
-
-getTheme3(brightness, primaryColor, accentColor) {
-  return ThemeData(
-    brightness: brightness,
-    primaryColor: primaryColor,
-    accentColor: accentColor,
   );
 }
