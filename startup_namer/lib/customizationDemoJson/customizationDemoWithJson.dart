@@ -15,11 +15,8 @@ class MyApp extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
-      supportedLocales: [
-        const Locale('en', ''),
-        const Locale('de', ''),
-      ],
-//      onGenerateTitle: (BuildContext c) => L10n.of(c).title,
+      supportedLocales: L10n.supportedLocales,
+      onGenerateTitle: (BuildContext c) => L10n.translate('title'),
       theme: appTheme.getTheme(),
       home: MyList(),
     );

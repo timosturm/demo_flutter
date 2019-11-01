@@ -4,8 +4,25 @@ import 'package:intl/intl.dart';
 import 'dart:convert';
 
 class L10n {
-  const L10n();
+  // the purpose of these methods is to handle the localization
+  // and the supported languages at one point in the code base
+  static List<String> _supportedLanguages = ['en', 'de'];
 
+  static List<String> get supportedLanguages {
+    return _supportedLanguages;
+  }
+
+  static Iterable<Locale> get supportedLocales {
+    List<Locale> locales = List();
+
+    _supportedLanguages.forEach((lang) {
+      locales.add(new Locale(lang, ''));
+    });
+
+    return Iterable.castFrom(locales);
+  }
+
+  // default load method, see: https://flutter.dev/docs/development/accessibility-and-localization/internationalization#dart-tools
   static Future<L10n> load(Locale locale) async {
     final String name =
         locale.countryCode.isEmpty ? locale.languageCode : locale.toString();
@@ -18,6 +35,7 @@ class L10n {
 
   static Map<String, String> _localized;
 
+  // load the json file containing the strings and save it as _localized
   static loadJson(localName) async {
     // load json file as asset (ref. pubspec.yaml -> assets)
     String jsonString = await rootBundle.loadString('i18n/$localName.json');
@@ -26,8 +44,8 @@ class L10n {
     _localized = map.cast<String, String>();
   }
 
+  // return corresponding value or message that the resource does not exist
   static String translate(String key) {
-    // return corresponding value or message that the resource does not exist
     return _localized[key] ?? '### Missing String! $key ###';
   }
 
@@ -41,7 +59,7 @@ class DemoLocalizationsDelegate extends LocalizationsDelegate<L10n> {
 
   @override
   bool isSupported(Locale locale) {
-    return ['en', 'de'].contains(locale.languageCode);
+    return L10n.supportedLanguages.contains(locale.languageCode);
   }
 
   @override
