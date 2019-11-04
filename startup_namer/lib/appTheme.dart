@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:startup_namer/themeSettings.dart';
 
 getTheme() {
   return ThemeData(
 // Define the default brightness and colors.
-    brightness: Brightness.dark,
-    primaryColor: Colors.green,
-    accentColor: Colors.cyan[600],
+    brightness: brightness,
+    primaryColor: primaryColor,
+    accentColor: accentColor,
 
 // Define the default font family.
-    fontFamily: 'Montserrat',
+    fontFamily: fontFamily,
 
 // Define the default TextTheme. Use this to specify the default
 // text styling for headlines, titles, bodies of text, and more.
     textTheme: TextTheme(
-      headline: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-      title: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-      body1: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+      headline:
+          TextStyle(fontSize: headlineFontSize, fontWeight: headlineFontWeight),
+      title: TextStyle(fontSize: titleFontSize, fontStyle: titleFontStyle),
+      body1: TextStyle(fontSize: body1FontSize, fontFamily: body1FontFamily),
     ),
   );
 }
