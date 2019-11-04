@@ -1,4 +1,4 @@
-import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 
@@ -40,23 +40,37 @@ class MyCustomFormState extends State<MyCustomForm> {
   // Note: This is a GlobalKey<FormState>,
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
-  var currentValue;
 
 //  final storage = FlutterSecureStorage();
   final key = "key";
   List<String> valuesInput = List();
-  List<String> valuesStored = List();
+
+//  List<String> valuesStored = List();
+  List<String> valuesStored = [];
+  List<String> keysStored = [];
 
   final _valueController = TextEditingController();
+  final storage = new FlutterSecureStorage();
 
-  _saveValues(value) {
-    // TODO check plugin implementation in terms of security
-//    FlutterKeychain.put(key: key, value: value);
+  _clearValues() {
+    setState(() {
+      valuesStored.clear();
+      keysStored.clear();
+    });
   }
 
-  _showValues() {
-    // TODO check plugin implementation in terms of security
-//    FlutterKeychain.get(key: key).then(print);
+  _setValuesFromMap(Map<String, String> map) {
+    var values = List<String>();
+    map.forEach((key, value) => values.add(value));
+    setState(() {
+      valuesStored = values;
+    });
+
+    var keys = List<String>();
+    map.forEach((key, value) => keys.add(key));
+    setState(() {
+      keysStored = keys;
+    });
   }
 
   @override
@@ -95,11 +109,9 @@ class MyCustomFormState extends State<MyCustomForm> {
                               SnackBar(content: Text('Processing Data')));
                           String text = _valueController.text;
                           _valueController.clear();
-                          _saveValues(text);
-                          _showValues();
-                          setState(() {
-                            valuesInput.add(text);
-                          });
+                          storage.write(
+                              key: Random().nextDouble().toString(),
+                              value: text);
                         }
                       },
                       child: Text('Save Value'),
@@ -108,22 +120,35 @@ class MyCustomFormState extends State<MyCustomForm> {
                 ],
               ),
             )),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: RaisedButton(
-            onPressed: () {
-              // TODO
-            },
-            child: Text('Show all Values'),
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            RaisedButton(
+              onPressed: () {
+                storage.readAll().then((map) => {_setValuesFromMap(map)});
+              },
+              child: Text('Show all Values'),
+            ),
+            RaisedButton(
+              onPressed: () {
+                storage.deleteAll().then((_) => {_clearValues()});
+              },
+              child: Text('Delete All Values'),
+            ),
+          ],
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16.0),
-          child: RaisedButton(
-            onPressed: () {
-              // TODO
+        Expanded(
+          child: ListView.separated(
+            itemCount: valuesStored.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text('Value: ${valuesStored[index]}'),
+                subtitle: Text('Key: ${keysStored[index]}'),
+              );
             },
-            child: Text('Delete All Values'),
+            separatorBuilder: (context, index) {
+              return Divider();
+            },
           ),
         ),
       ],
