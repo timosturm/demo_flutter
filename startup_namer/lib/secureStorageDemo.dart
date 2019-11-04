@@ -1,8 +1,8 @@
-import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import 'package:flutter_keychain/flutter_keychain.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 void main() => runApp(MyApp());
 
@@ -40,61 +40,124 @@ class MyCustomFormState extends State<MyCustomForm> {
   // Note: This is a GlobalKey<FormState>,
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
-  var currentValue;
 
 //  final storage = FlutterSecureStorage();
   final key = "key";
+  List<String> valuesInput = List();
+
+//  List<String> valuesStored = List();
+  List<String> valuesStored = [];
+  List<String> keysStored = [];
 
   final _valueController = TextEditingController();
+  final storage = new FlutterSecureStorage();
 
-  _saveValue(value) {
-    // TODO check plugin implementation in terms of security
-    FlutterKeychain.put(key: key, value: value);
+  _clearValues() {
+    setState(() {
+      valuesStored.clear();
+      keysStored.clear();
+    });
   }
 
-  _showValue() {
-    // TODO check plugin implementation in terms of security
-    FlutterKeychain.get(key: key).then(print);
+  _setValuesFromMap(Map<String, String> map) {
+    var values = List<String>();
+    map.forEach((key, value) => values.add(value));
+    setState(() {
+      valuesStored = values;
+    });
+
+    var keys = List<String>();
+    map.forEach((key, value) => keys.add(key));
+    setState(() {
+      keysStored = keys;
+    });
+  }
+
+  _deleteValue(String key) {
+    storage.delete(key: key);
+    storage.readAll().then((map) => {_setValuesFromMap(map)});
   }
 
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
-    return Form(
-      key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          TextFormField(
-            controller: _valueController,
-            decoration:
-                new InputDecoration(hintText: "Value to save securely."),
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Form(
+            key: _formKey,
+            child: Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  TextFormField(
+                    controller: _valueController,
+                    decoration: new InputDecoration(
+                        hintText: "Value to save securely."),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Please enter some text';
+                      }
+                      return null;
+                    },
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: RaisedButton(
+                      onPressed: () {
+// Validate returns true if the form is valid, or false
+// otherwise.
+                        if (_formKey.currentState.validate()) {
+// If the form is valid, display a Snackbar.
+                          Scaffold.of(context).showSnackBar(
+                              SnackBar(content: Text('Processing Data')));
+                          String text = _valueController.text;
+                          _valueController.clear();
+                          storage.write(
+                              key: Random().nextDouble().toString(),
+                              value: text);
+                        }
+                      },
+                      child: Text('Save Value'),
+                    ),
+                  ),
+                ],
+              ),
+            )),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            RaisedButton(
+              onPressed: () {
+                storage.readAll().then((map) => {_setValuesFromMap(map)});
+              },
+              child: Text('Show all Values'),
+            ),
+            RaisedButton(
+              onPressed: () {
+                storage.deleteAll().then((_) => {_clearValues()});
+              },
+              child: Text('Delete All Values'),
+            ),
+          ],
+        ),
+        Expanded(
+          child: ListView.separated(
+            itemCount: valuesStored.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text('Value: ${valuesStored[index]}'),
+                subtitle: Text('Key: ${keysStored[index]}'),
+                onTap: () => _deleteValue(keysStored[index]),
+              );
+            },
+            separatorBuilder: (context, index) {
+              return Divider();
             },
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: RaisedButton(
-              onPressed: () {
-                // Validate returns true if the form is valid, or false
-                // otherwise.
-                if (_formKey.currentState.validate()) {
-                  // If the form is valid, display a Snackbar.
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text('Processing Data')));
-                  _saveValue(_valueController.text);
-                  _showValue();
-                }
-              },
-              child: Text('Save'),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
