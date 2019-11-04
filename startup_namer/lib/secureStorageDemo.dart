@@ -73,6 +73,11 @@ class MyCustomFormState extends State<MyCustomForm> {
     });
   }
 
+  _deleteValue(String key) {
+    storage.delete(key: key);
+    storage.readAll().then((map) => {_setValuesFromMap(map)});
+  }
+
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
@@ -144,6 +149,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               return ListTile(
                 title: Text('Value: ${valuesStored[index]}'),
                 subtitle: Text('Key: ${keysStored[index]}'),
+                onTap: () => _deleteValue(keysStored[index]),
               );
             },
             separatorBuilder: (context, index) {
