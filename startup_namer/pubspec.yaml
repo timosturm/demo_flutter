@@ -32,9 +32,11 @@ dependencies:
   http: ^0.11.3+16
   flutter_secure_storage: ^3.3.1+1
   #  flutter_keychain: ^1.0.0
-#  flutter_keychain:
-#    git:
-#      url: git://github.com/jeroentrappers/flutter_keychain
+  #  flutter_keychain:
+  #    git:
+  #      url: git://github.com/jeroentrappers/flutter_keychain
+
+  json_annotation: ^2.0.0
 
   barcode_scan: ^1.0.0
   firebase_messaging: ^5.1.6
@@ -43,6 +45,9 @@ dev_dependencies:
   flutter_driver:
     sdk: flutter
   test: any
+
+  build_runner: ^1.0.0
+  json_serializable: ^2.0.0
 
   flutter_launcher_icons: "^0.7.3" # https://pub.dev/packages/flutter_launcher_icons
   # run with:
