@@ -42,11 +42,15 @@ class DiscountOrder extends Order {
 @JsonSerializable()
 class ChristmasOrder extends Order {
   String _greeting;
+  String _present;
 
   String get greeting => _greeting;
 
-  ChristmasOrder(String address, double price, String greeting)
+  String get present => _present;
+
+  ChristmasOrder(String address, double price, String greeting, String present)
       : this._greeting = greeting,
+        this._present = present,
         super(address, price);
 
   factory ChristmasOrder.fromJson(Map<String, dynamic> json) =>

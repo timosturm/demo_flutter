@@ -26,13 +26,17 @@ Map<String, dynamic> _$DiscountOrderToJson(DiscountOrder instance) =>
     };
 
 ChristmasOrder _$ChristmasOrderFromJson(Map<String, dynamic> json) {
-  return ChristmasOrder(json['address'] as String,
-      (json['price'] as num)?.toDouble(), json['greeting'] as String);
+  return ChristmasOrder(
+      json['address'] as String,
+      (json['price'] as num)?.toDouble(),
+      json['greeting'] as String,
+      json['present'] as String);
 }
 
 Map<String, dynamic> _$ChristmasOrderToJson(ChristmasOrder instance) =>
     <String, dynamic>{
       'price': instance.price,
       'address': instance.address,
-      'greeting': instance.greeting
+      'greeting': instance.greeting,
+      'present': instance.present
     };

@@ -12,22 +12,28 @@ class JsonTestWidget extends StatefulWidget {
 }
 
 class JsonTestWidgetState extends State<JsonTestWidget> {
-  static List<Order> orders = [
-    Order("orderAdd", 55),
-    DiscountOrder("discOrd", 33, 5),
-    ChristmasOrder("christAdd", 11, "Hohoho!"),
-  ];
+//  static List<Order> orders = [
+//    Order("orderAdd", 55),
+//    DiscountOrder("discOrd", 33, 5),
+//    ChristmasOrder("christAdd", 11, "Hohoho!"),
+//  ];
 
   List<Order> serializedOrders = [];
 
   JsonTestWidgetState() {
-    print("Liste: $orders");
+//    print("Liste: $orders");
 
-    List<String> jsons = [];
+//    List<String> jsons = [];
     // [{"price":55.0,"address":"orderAdd"}, {"price":33.0,"address":"discOrd","discount":5}, {"price":11.0,"address":"christAdd","greeting":"Hohoho!"}]
-    for (Order order in orders) {
-      jsons.add(jsonEncode(order));
-    }
+//    for (Order order in orders) {
+//      jsons.add(jsonEncode(order));
+//    }
+
+    List<String> jsons = [
+      "{\"price\":55.0,\"address\":\"orderAdd\"}",
+      "{\"price\":33.0,\"address\":\"discOrd\",\"discount\":5}",
+      "{\"price\":11.0,\"address\":\"christAdd\",\"greeting\":\"Hohoho!\"}"
+    ];
 
     print("Strings: $jsons");
 
@@ -68,8 +74,8 @@ class JsonTestWidgetState extends State<JsonTestWidget> {
             } else if (order is ChristmasOrder) {
               return ListTile(
                 title: Text(order.address),
-                subtitle:
-                    Text("Price: ${order.price} Greeting: ${order.greeting}"),
+                subtitle: Text(
+                    "Price: ${order.price} Greeting: ${order.greeting} Present: ${order.present}"),
               );
             }
             return ListTile(
