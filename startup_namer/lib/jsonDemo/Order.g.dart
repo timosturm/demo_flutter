@@ -14,15 +14,19 @@ Map<String, dynamic> _$OrderToJson(Order instance) =>
     <String, dynamic>{'price': instance.price, 'address': instance.address};
 
 DiscountOrder _$DiscountOrderFromJson(Map<String, dynamic> json) {
-  return DiscountOrder(json['address'] as String,
-      (json['price'] as num)?.toDouble(), json['discount'] as int);
+  return DiscountOrder(
+      json['address'] as String,
+      (json['price'] as num)?.toDouble(),
+      json['discount'] as int,
+      json['list'] as Uint8List);
 }
 
 Map<String, dynamic> _$DiscountOrderToJson(DiscountOrder instance) =>
     <String, dynamic>{
       'price': instance.price,
       'address': instance.address,
-      'discount': instance.discount
+      'discount': instance.discount,
+      'list': instance.list
     };
 
 ChristmasOrder _$ChristmasOrderFromJson(Map<String, dynamic> json) {

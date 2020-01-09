@@ -1,3 +1,6 @@
+import 'dart:ffi';
+import 'dart:typed_data';
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'Order.g.dart';
@@ -26,11 +29,15 @@ class Order {
 @JsonSerializable()
 class DiscountOrder extends Order {
   int _discount;
+  Uint8List _list;
 
   int get discount => _discount;
 
-  DiscountOrder(String address, double price, int discount)
+  Uint8List get list => _list;
+
+  DiscountOrder(String address, double price, int discount, Uint8List list)
       : this._discount = discount,
+        this._list = list,
         super(address, price);
 
   factory DiscountOrder.fromJson(Map<String, dynamic> json) =>
