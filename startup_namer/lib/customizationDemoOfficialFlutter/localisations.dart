@@ -15,9 +15,6 @@ class L10n {
     return initializeMessages(localeName).then((_) {
       return L10n(localeName);
     });
-
-    // TODO it would be possible to load a json file as a map,
-    //  and use that for the messages instead
   }
 
   static L10n of(BuildContext context) {
