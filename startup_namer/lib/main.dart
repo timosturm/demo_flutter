@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
-import 'appTheme.dart' as appTheme;
+import 'app_theme.dart' as appTheme;
 
 void main() => runApp(MyApp());
 

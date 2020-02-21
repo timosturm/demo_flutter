@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../appTheme.dart' as appTheme;
+import '../app_theme.dart' as appTheme;
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'localisations.dart';

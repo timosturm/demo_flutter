@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:startup_namer/themeSettings.dart';
+import 'package:startup_namer/theme_settings.dart';
 
 getTheme() {
   return ThemeData(
