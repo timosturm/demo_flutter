@@ -75,11 +75,29 @@ class _PushMessagingState extends State<PushMessaging> {
         print("onResume: $message");
         _onResume(message);
       },
+      onBackgroundMessage: myBackgroundMessageHandler,
     );
 
     _firebaseMessaging.getToken().then((token) {
       print("FCM token: $token");
     });
+  }
+
+  static Future<dynamic> myBackgroundMessageHandler(
+      Map<String, dynamic> message) {
+    if (message.containsKey('data')) {
+      // Handle data message
+      final dynamic data = message['data'];
+      debugPrint('Background data!');
+    }
+
+    if (message.containsKey('notification')) {
+      // Handle notification message
+      final dynamic notification = message['notification'];
+      debugPrint('Background notification!');
+    }
+
+    // Or do other work.
   }
 
   @override
