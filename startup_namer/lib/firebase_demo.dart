@@ -1,6 +1,6 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,40 +9,12 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final appName = 'Custom Themes';
-
     return MaterialApp(
-      title: appName,
+      title: "appName",
       theme: ThemeData(
         primaryColor: Colors.green,
       ),
       home: PushMessaging(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  final String title;
-
-  MyHomePage({Key key, @required this.title}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: Center(
-        child: Container(
-          child: Text(
-            'Just some placeholder text.',
-          ),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: null,
-        child: Icon(Icons.add),
-      ),
     );
   }
 }
@@ -59,13 +31,22 @@ class _PushMessagingState extends State<PushMessaging> {
   void _onMessage(Map<String, dynamic> map) {
     setState(() {
 //      _msg = map.toString();
-      var map2 = map['notification'];
-      String title = map2['title'];
-      String body = map2['body'];
+      //var map2 = map['notification'];
+      if (map['notification'] != null) {
+        print('This is a notification message:');
+      } else {
+        print('This is a data message:');
+      }
 
-      print(map);
+      debugPrint("$map");
 
-      _msg = "Title: $title | Body: $body";
+      _msg = map.toString();
+      //String title = map2['title'];
+      //String body = map2['body'];
+
+      //print(map);
+
+      //_msg = "Title: $title | Body: $body";
     });
   }
 
@@ -103,10 +84,9 @@ class _PushMessagingState extends State<PushMessaging> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: const Text("This is a title."),
+        title: const Text("FCM Demo"),
       ),
       body: Center(
         child: Text("Something: $_msg."),

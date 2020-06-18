@@ -1,4 +1,4 @@
-package com.test.startup_namer
+package it.netknights.piauthenticator
 
 import android.os.Bundle
 
